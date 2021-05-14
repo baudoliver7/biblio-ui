@@ -1,5 +1,5 @@
 # biblio-ui-personal
-Interface utilisateur pour le personnel
+Interface utilisateur
 
 ## Getting Started with Create React App
 

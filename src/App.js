@@ -1,42 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { AuthProvider } from './components/context/AuthContext'
+import PrivateRoute from './components/misc/PrivateRoute'
+import Navbar from './components/misc/Navbar'
+import Home from './components/home/Home'
+import Login from './components/home/Login'
+import Signup from './components/home/Signup'
+import AdminPage from './components/admin/AdminPage'
+import UserPage from './components/user/UserPage'
 
-class App extends Component {
-  state = {
-    isLoading: true,
-    groups: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/Livres');
-    const body = await response.json();
-    this.setState({ livres: body, isLoading: false });
-  }
-
-  render() {
-    const {livres, isLoading} = this.state;
-
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div className="App-intro">
-            <h2>Liste de livres</h2>
-            {livres.map(livre =>
-              <div key={livre.id}>
-                {livre.intitule}
-              </div>
-            )}
-          </div>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Route path='/' exact component={Home} />
+        <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
+        <PrivateRoute path='/adminpage' component={AdminPage} />
+        <PrivateRoute path='/userpage' component={UserPage} />
+      </Router>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App

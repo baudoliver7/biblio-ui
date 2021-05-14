@@ -14,6 +14,7 @@ class AdminPage extends Component {
     books: [],
     bookIsbn: '',
     bookTitle: '',
+    bookCopies: 0,
     bookTextSearch: '',
     userUsernameSearch: '',
     isAdmin: true,
@@ -116,14 +117,15 @@ class AdminPage extends Component {
     const Auth = this.context
     const user = Auth.getUser()
 
-    let { bookIsbn, bookTitle } = this.state
+    let { bookIsbn, bookTitle, bookCopies } = this.state
     bookIsbn = bookIsbn.trim()
     bookTitle = bookTitle.trim()
+    bookCopies = bookCopies
     if (!(bookIsbn && bookTitle)) {
       return
     }
 
-    const book = { isbn: bookIsbn, title: bookTitle }
+    const book = { isbn: bookIsbn, title: bookTitle, copies: bookCopies }
     bookApi.addBook(user, book)
       .then(() => {
         this.clearBookForm()
@@ -153,7 +155,8 @@ class AdminPage extends Component {
   clearBookForm = () => {
     this.setState({
       bookIsbn: '',
-      bookTitle: ''
+      bookTitle: '',
+      bookCopies: 0
     })
   }
 
@@ -161,7 +164,7 @@ class AdminPage extends Component {
     if (!this.state.isAdmin) {
       return <Redirect to='/' />
     } else {
-      const { isUsersLoading, users, userUsernameSearch, isBooksLoading, books, bookIsbn, bookTitle, bookTextSearch } = this.state
+      const { isUsersLoading, users, userUsernameSearch, isBooksLoading, books, bookIsbn, bookTitle, bookCopies, bookTextSearch } = this.state
       return (
         <Container>
           <AdminTab
@@ -174,6 +177,7 @@ class AdminPage extends Component {
             books={books}
             bookIsbn={bookIsbn}
             bookTitle={bookTitle}
+            bookCopies={bookCopies}
             bookTextSearch={bookTextSearch}
             handleAddBook={this.handleAddBook}
             handleDeleteBook={this.handleDeleteBook}

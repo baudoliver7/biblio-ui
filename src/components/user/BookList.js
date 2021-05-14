@@ -16,6 +16,7 @@ function BookList({ isBooksLoading, bookTextSearch, books, handleInputChange, ha
             <Item.Description>
               <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
             </Item.Description>
+            <Item.Meta>{book.copies}</Item.Meta>
           </Item.Content>
         </Item>
       )

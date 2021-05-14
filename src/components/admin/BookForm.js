@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Form, Icon } from 'semantic-ui-react'
 
-function BookForm({ bookIsbn, bookTitle, handleInputChange, handleAddBook }) {
-  const createBtnDisabled = bookIsbn.trim() === '' || bookTitle.trim() === ''
+function BookForm({ bookIsbn, bookTitle, bookCopies, handleInputChange, handleAddBook }) {
+  const createBtnDisabled = bookIsbn.trim() === '' || bookTitle.trim() === '' || bookCopies < 0
   return (
     <Form onSubmit={handleAddBook}>
       <Form.Group>
@@ -16,6 +16,13 @@ function BookForm({ bookIsbn, bookTitle, handleInputChange, handleAddBook }) {
           name='bookTitle'
           placeholder='Titre *'
           value={bookTitle}
+          onChange={handleInputChange}
+        />
+        <Form.Input
+          type="number"
+          name='bookCopies'
+          placeholder='Number *'
+          value={bookCopies}
           onChange={handleInputChange}
         />
         <Button icon labelPosition='right' disabled={createBtnDisabled}>

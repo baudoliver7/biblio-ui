@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, Grid, Image, Input, Table } from 'semantic-ui-react'
 import BookForm from './BookForm'
 
-function BookTable({ books, bookIsbn, bookTitle, bookTextSearch, handleInputChange, handleAddBook, handleDeleteBook, handleSearchBook }) {
+function BookTable({ books, bookIsbn, bookTitle, bookCopies, bookTextSearch, handleInputChange, handleAddBook, handleDeleteBook, handleSearchBook }) {
   let bookList
   if (books.length === 0) {
     bookList = (
@@ -28,6 +28,7 @@ function BookTable({ books, bookIsbn, bookTitle, bookTextSearch, handleInputChan
           </Table.Cell>
           <Table.Cell>{book.isbn}</Table.Cell>
           <Table.Cell>{book.title}</Table.Cell>
+          <Table.Cell>{book.copies}</Table.Cell>
         </Table.Row>
       )
     })
@@ -52,6 +53,7 @@ function BookTable({ books, bookIsbn, bookTitle, bookTextSearch, handleInputChan
             <BookForm
               bookIsbn={bookIsbn}
               bookTitle={bookTitle}
+              bookCopies={bookCopies}
               handleInputChange={handleInputChange}
               handleAddBook={handleAddBook}
             />
@@ -65,6 +67,7 @@ function BookTable({ books, bookIsbn, bookTitle, bookTextSearch, handleInputChan
             <Table.HeaderCell width={3}>Couverture</Table.HeaderCell>
             <Table.HeaderCell width={4}>ISBN</Table.HeaderCell>
             <Table.HeaderCell width={8}>Titre</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Exemplaires</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
